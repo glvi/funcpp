@@ -73,9 +73,12 @@ jobs:
     - name: Upgrade system
       run: |
         wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-        sudo touch /etc/apt/sources.list.d/llvm.sources
-        sudo echo "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-19 main" >> /etc/apt/sources.list.d/llvm.sources
-        sudo echo "deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy-19 main" >> /etc/apt/sources.list.d/llvm.sources
+        cat > ~/llvm.sources <<EOF
+        deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-19 main
+        deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy-19 main
+        EOF
+        sudo mv ~/llvm.sources /etc/apt/sources.list.d
+        sudo apt-get update
         sudo apt-get install clang-19
       
     - name: System info
