@@ -10,4 +10,17 @@ functional programming.
 
 - A C++20 compiler
 
+  Actually, you'll need LLVM clang 19 or later. Because I decided to
+  go with C++ modules. The rationale was that I wanted to make certain
+  helper symbols unavailable to the user, which I can do with C++
+  modules, but cannot do when including C++ header files.
+
+- GNU make
+
+  Because I am an old-fashioned kind of guy.
+
+- Doxygen (opt.)
+
+  … if you want API docs
+
 (end of file)
