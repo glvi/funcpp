@@ -70,16 +70,19 @@ jobs:
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
-      # - name: Get LLVM clang
-      #   run: sudo apt-get install clang-19
-
-    - name: System info
+    - name: Upgrade system
       run: |
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        sudo touch /etc/apt/sources.list.d/llvm.sources
+        sudo echo "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-19 main" >> /etc/apt/sources.list.d/llvm.sources
+        sudo echo "deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy-19 main" >> /etc/apt/sources.list.d/llvm.sources
+        sudo apt-get install clang-19
+      
+    - name: System info
+      run: |        
         uname -a
         make --version
         clang --version
-        ls -l /etc/apt/
-        ls -l /etc/apt/sources.list.d
       
     - name: Make output directories
       run: mkdir -p .bin .doc .lib .obj .pcm
