@@ -1,4 +1,4 @@
-CXX=/usr/local/opt/llvm/bin/clang++
+CXX=clang++
 CPPFLAGS=-std=c++20 -nostdinc
 CXXFLAGS=-fprebuilt-module-path=.pcm
 
