@@ -79,6 +79,7 @@ jobs:
         make --version
         clang --version
         ls -l /etc/apt/
+        ls -l /etc/apt/sources.list.d
       
     - name: Make output directories
       run: mkdir -p .bin .doc .lib .obj .pcm
