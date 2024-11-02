@@ -6,6 +6,10 @@ occasional foray into other areas like type theory, category theory,
 or propositional logic. But primarily *Fun C++* is about the joy of
 functional programming.
 
+## Note
+
+This is currently work in progress.
+
 ## Requirements
 
 - A C++20 compiler
