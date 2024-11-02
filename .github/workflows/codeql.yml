@@ -82,14 +82,14 @@ jobs:
       run: |
         wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
         cat > ~/llvm.sources <<EOF
-        deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy main
-        deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy main
+        deb https://apt.llvm.org/jammy/ llvm-toolchain-jammy main
+        deb-src https://apt.llvm.org/jammy/ llvm-toolchain-jammy main
         # 18
-        deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main
-        deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main
+        deb https://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main
+        deb-src https://apt.llvm.org/jammy/ llvm-toolchain-jammy-18 main
         # 19
-        deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-19 main
-        deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy-19 main
+        deb https://apt.llvm.org/jammy/ llvm-toolchain-jammy-19 main
+        deb-src https://apt.llvm.org/jammy/ llvm-toolchain-jammy-19 main
         EOF
         sudo mv ~/llvm.sources /etc/apt/sources.list.d
         sudo chown root.root /etc/apt/sources.list.d/llvm.sources
