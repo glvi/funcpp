@@ -92,14 +92,14 @@ jobs:
         EOF
         sudo mv ~/llvm.sources.list /etc/apt/sources.list.d
         sudo chown root.root /etc/apt/sources.list.d/llvm.sources.list
-        sudo ls -l /etc/apt/
-        sudo ls -l /etc/apt/sources.list.d
         sudo apt-get update
+        sudo apt-get upgrade
         sudo apt-get install clang-19
+        sudo dpkg -L clang-19
       
     - name: System info -2-
       run: |        
-        clang --version
+        clang-19 --version
       
     - name: Make output directories
       run: mkdir -p .bin .doc .lib .obj .pcm
