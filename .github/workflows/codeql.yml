@@ -76,6 +76,7 @@ jobs:
         uname -a
         make --version
         clang --version
+        cat /etc/apt/sources.list
 
     - name: Upgrade system
       run: |
