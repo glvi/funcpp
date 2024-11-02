@@ -83,9 +83,11 @@ jobs:
       
     - name: System info
       run: |        
+        pwd
         uname -a
         make --version
         clang --version
+        sudo cat /etc/apt/sources.list.d/llvm.sources
       
     - name: Make output directories
       run: mkdir -p .bin .doc .lib .obj .pcm
