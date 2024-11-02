@@ -85,12 +85,12 @@ jobs:
         deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy-19 main
         EOF
         sudo mv ~/llvm.sources /etc/apt/sources.list.d
+        sudo cat /etc/apt/sources.list.d/llvm.sources
         sudo apt-get update
         sudo apt-get install clang-19
       
     - name: System info -2-
       run: |        
-        sudo cat /etc/apt/sources.list.d/llvm.sources
         clang --version
       
     - name: Make output directories
