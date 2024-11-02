@@ -72,6 +72,12 @@ jobs:
 
     - name: Get LLVM clang
       run: sudo apt-get install clang-19
+
+    - name: System info
+      run: |
+        uname -a
+        make --version
+        clang --version
       
     - name: Make output directories
       run: mkdir -p .bin .doc .lib .obj .pcm
