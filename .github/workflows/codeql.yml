@@ -88,7 +88,6 @@ jobs:
         sudo apt-get update
         sudo apt-get upgrade
         sudo apt-get install clang-19
-        sudo dpkg -L clang-19
       
     - name: Make output directories
       run: mkdir -p .bin .doc .lib .obj .pcm
@@ -102,7 +101,7 @@ jobs:
     - if: matrix.build-mode == 'manual'
       shell: bash
       run: |
-        make test CXX=/usr/bin/clang-19
+        make test CXX=clang++-19
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
