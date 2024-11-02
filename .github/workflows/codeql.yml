@@ -69,17 +69,9 @@ jobs:
 
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
-      
-    - name: System info -1-
-      run: |        
-        pwd
-        uname -a
-        make --version
-        clang --version
 
     - name: Upgrade system
       run: |
-        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
         cat > ~/llvm.sources.list <<EOF
         deb https://apt.llvm.org/jammy/ llvm-toolchain-jammy main
         deb-src https://apt.llvm.org/jammy/ llvm-toolchain-jammy main
@@ -92,14 +84,11 @@ jobs:
         EOF
         sudo mv ~/llvm.sources.list /etc/apt/sources.list.d
         sudo chown root.root /etc/apt/sources.list.d/llvm.sources.list
+        wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
         sudo apt-get update
         sudo apt-get upgrade
         sudo apt-get install clang-19
         sudo dpkg -L clang-19
-      
-    - name: System info -2-
-      run: |        
-        clang-19 --version
       
     - name: Make output directories
       run: mkdir -p .bin .doc .lib .obj .pcm
@@ -112,10 +101,8 @@ jobs:
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
     - if: matrix.build-mode == 'manual'
       shell: bash
-      env:
-        CXX: /usr/bin/clang-19
       run: |
-        make test
+        make test CXX=/usr/bin/clang-19
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
