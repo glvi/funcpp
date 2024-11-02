@@ -78,7 +78,7 @@ jobs:
         uname -a
         make --version
         clang --version
-        cat /etc/apt/apt.conf
+        ls -l /etc/apt/
       
     - name: Make output directories
       run: mkdir -p .bin .doc .lib .obj .pcm
