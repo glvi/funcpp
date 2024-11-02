@@ -69,6 +69,13 @@ jobs:
 
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
+      
+    - name: System info -1-
+      run: |        
+        pwd
+        uname -a
+        make --version
+        clang --version
 
     - name: Upgrade system
       run: |
@@ -81,13 +88,10 @@ jobs:
         sudo apt-get update
         sudo apt-get install clang-19
       
-    - name: System info
+    - name: System info -2-
       run: |        
-        pwd
-        uname -a
-        make --version
-        clang --version
         sudo cat /etc/apt/sources.list.d/llvm.sources
+        clang --version
       
     - name: Make output directories
       run: mkdir -p .bin .doc .lib .obj .pcm
