@@ -9,11 +9,14 @@ namespace funcpp {
   ///@addtogroup funcppMaybe
   ///@{
 
+  /// @cond show_internal
   /**
    * @brief Optional type that holds nothing.
    */
   struct _nothing {};
+  /// @endcond
 
+  /// @cond show_internal
   /**
    * @brief Optional type that holds something
    *
@@ -24,6 +27,7 @@ namespace funcpp {
     /// @brief Reproduces `A`
     using type = A;
   };
+  /// @endcond
 
   ///@}
 } // namespace funcpp
@@ -244,7 +248,7 @@ export namespace funcpp {
    */
   template<template<typename> typename F>
   struct bind<_nothing, F> {
-    /// `F` bound to `MA`
+    /// `F` bound to `_nothing`
     using type = _nothing;
     static_assert(maybe_type<type>);
   };
@@ -254,7 +258,7 @@ export namespace funcpp {
    */
   template<typename A, template<typename> typename F>
   struct bind<_some<A>, F> {
-    /// `F` bound to `MA`
+    /// `F` bound to `_some<A>`
     using type = typename F<A>::type;
     static_assert(maybe_type<type>);
   };
