@@ -1,7 +1,10 @@
 # Sums of types
 
-A sum type `Σ` is an abstract type that is formed by taking two or
+A sum type `Σ` is an imaginary type that is formed by taking two or
 more distinct types, and declaring that `Σ` is either one of those.
+
+A sum type is an _imaginary_ type, because it exists only in the
+imagination of the programmer, not in the compiler.
 
 In type notation, given types `A` and `B`, the sum of those types is
 denoted as
@@ -14,7 +17,7 @@ of type `B`.
 Check out the definition of a sum type in _Haskell_, as an example for
 a pure functional programming language.
 ```haskell
-data Σ = A a | B b
+data Σ a b = A a | B b
 ```
 
 Check out the definition of a sum type in _Swift_, as an example a
@@ -26,7 +29,6 @@ enum Σ {
 }
 ```
 
-C++ has no inherent means to denote a sum type. There is
-`std::variant` in the C++ standard library that provides a
-workaround. But at the language level itself, it is not possible to
-define a sum type.
+C++ has no inherent means to denote a sum type. There is a workaround
+in the form of `std::variant` in the C++ standard library. But at the
+language level itself, it is not possible to define a sum type.
