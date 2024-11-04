@@ -10,21 +10,8 @@ functional programming.
 
 This is currently work in progress.
 
-## Requirements
+## Introduction
 
-- A C++20 compiler
+- On sum types in general and in C++ [[link](sum_types)]
 
-  Actually, you'll need LLVM clang 19 or later. Because I decided to
-  go with C++ modules. The rationale was that I wanted to make certain
-  helper symbols unavailable to the user, which I can do with C++
-  modules, but cannot do when including C++ header files.
-
-- GNU make
-
-  Because I am an old-fashioned kind of guy.
-
-- Doxygen (opt.)
-
-  … if you want API docs
-
-(end of file)
+_(end of file)_
