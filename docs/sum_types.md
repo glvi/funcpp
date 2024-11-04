@@ -224,3 +224,11 @@ unsigned count(_node<A, B, C>&& node)
   return 1 + count(node.b) + count(node.c);
 }
 ```
+
+But there can never be concise declarations like these
+```c++
+unsigned count(maybe&&);
+unsigned count(list&&);
+unsigned count(tree&&);
+```
+because those types are imaginary, and not known to the compiler.
