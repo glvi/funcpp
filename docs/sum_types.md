@@ -131,9 +131,9 @@ struct _node {
 };
 ```
 
-Functions on maybes, lists, or trees then must be defined for each of
-the alternatives with the appropriate semantics; for example a
-counting function
+Even though C++ has no explicit means of declaring sum types, sums
+types occur implicitly in C++ in the form of function overloading. See
+the example of a counting function below.
 
 ```c++
 unsigned count(_nothing&&) {
