@@ -49,6 +49,7 @@ is: _a sum of types_.
 
 ```c++
 // obviously not real C++
+/// @return the absolute value of the argument
 auto abs(<int + long> arg) -> <int + long>;
 ```
 
