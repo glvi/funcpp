@@ -17,18 +17,55 @@ s:S ∧ s = (inb a) ⇒ b:B // elimination 2/2
 
 Sums of types may involve more than just two alternatives. In general,
 a sum is denoted as
+
 ```
 Σn Ai ≡ A1 + A2 + … + An
 ```
+
 with
+
 ```
-Σ2 ≡ A + B // by convention
-Σ1 ≡ A     // by convention
 Σ0 ≡ void  // type without values
 ```
 
+## C++
+
+In C++ sum types occur _naturally_ in function overloading. Let's look
+at a function from the standard C++ library: `abs`.
+
+`abs` has multiple overloaded declarations (just listing two here).
+
+```c++
+int  abs (int);
+long abs (long);
+```
+
+All `abs` functions are supposed to perform the same operation. So it
+could be argued that those functions are the same but with alternative
+argument types. `abs` could be described as one function that takes an
+argument of a numerical type, and returns a result of the same type
+where the argument type can be _either_ one of `int` _or_ `long`, that
+is: _a sum of types_.
+
+```c++
+// obviously not real C++
+auto abs(<int + long> arg);
+```
+
+## Type theory
+
+Sum types are called _sum_ types, because of how their cardinality
+adds up. If `A` has two values (say `false` and `true`), and `B` has three values
+(say `red`, `green`, and `blue`) then `A+B` has five values: (`false`,
+`true`, `red`, `green`, and `blue`).
+
+Compare this to the product type `A×B` which has six (2×3) values:
+(`(false, red)`, `(false, green)`, `(false, blue)`, `(true, red)`,
+`(true, green)`, `(true, blue)`).
+
 Recursive formation is allowed; as long as at least one of the
 alternatives is free from recursion.
+
 ```
 S ≡ A + B + S // recursive formation
 ```
@@ -37,6 +74,7 @@ In order to use `S` as the domain of a function `f`, said function
 must be defined for the domains of both `A` _and_ `B`. Function
 application is delegated to the appropriate domain. The co-domains of
 `f(A)` and `f(B)` may differ.
+
 ```
 let  f : A → X
 and  f : B → Y
@@ -47,6 +85,7 @@ then f : A + B → X + Y
 
 Recursive function definitions are allowed; as long as at least
 one of the alternatives is free from recursion.
+
 ```
 f : A + B + S → X + Y
     ina a ↦ f(a)
@@ -61,6 +100,7 @@ in the sense that it exists only in the imagination of the programmer.
 It is not accessible to the compiler.
 
 In principle, there is `union` as in
+
 ```c++
 union S {
   A a;
@@ -71,6 +111,7 @@ union S {
 But `union` is _forgetful_ in the sense that it does not remember whether
 it holds `A` or `B`. The information is contained in the union; but
 without outside help, it cannot be recovered.
+
 ```c++
 enum class D {_a, _b} d;
 union S {A a; B b;};
@@ -226,9 +267,11 @@ unsigned count(_node<A, B, C>&& node)
 ```
 
 But there can never be concise declarations like these
+
 ```c++
 unsigned count(maybe&&);
 unsigned count(list&&);
 unsigned count(tree&&);
 ```
+
 because those types are imaginary, and not known to the compiler.
