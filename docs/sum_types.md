@@ -49,7 +49,7 @@ is: _a sum of types_.
 
 ```c++
 // obviously not real C++
-auto abs(<int + long> arg);
+auto abs(<int + long> arg) -> <int + long>;
 ```
 
 ## Type theory
