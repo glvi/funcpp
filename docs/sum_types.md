@@ -2,10 +2,10 @@
 
 ## Type theory
 
-In type theory, a sum of types `S ≡ A+B` is a type that is formed from
-two or more given types. Values in `S` are then introduced by taking
-them from _either_ `A` _or_ `B`. Type theory usually adds some record
-keeping (`ina`, `inb`) to remember which alternative was used.
+In type theory, given two types `A` and `B`, a _sum type_ `S` is
+formed as `S ≡ A+B`.  Values in `S` are introduced by taking them from
+_either_ `A` _or_ `B`. Some record keeping (`ina`, `inb`) is added to
+remember which alternative was used.
 
 ```
 S ≡ A + B               // formation
@@ -15,17 +15,18 @@ s:S ∧ s = (ina a) ⇒ a:A // elimination 1/2
 s:S ∧ s = (inb a) ⇒ b:B // elimination 2/2
 ```
 
-Sums of types may involve more than just two alternatives. In general,
-a sum is denoted as
+Sum types may involve more than just two alternatives. In general, a
+sum type is denoted as follows.
 
 ```
 Σn Ai ≡ A1 + A2 + … + An
 ```
 
-with
+With special cases denoted as follows.
 
 ```
-Σ0 ≡ void  // type without values
+Σ1 A ≡ A     // type A itself
+Σ0   ≡ void  // type without values
 ```
 
 ## C++
@@ -40,16 +41,14 @@ int  abs (int);
 long abs (long);
 ```
 
-All `abs` functions are supposed to perform the same operation. So it
-could be argued that those functions are the same but with alternative
-argument types. `abs` could be described as one function that takes an
-argument of a numerical type, and returns a result of the same type
-where the argument type can be _either_ one of `int` _or_ `long`, that
-is: _a sum of types_.
+All `abs` functions perform the same operation: return the absolute
+value of the argument. `abs` takes as argument either an `int` or a
+`long`. Therefore, the type of the argument of the function `abs` is
+effectively, the sum type `int + long`.
 
 ```c++
 // obviously not real C++
-/// @return the absolute value of the argument
+// @return the absolute value of the argument
 auto abs(<int + long> arg) -> <int + long>;
 ```
 
