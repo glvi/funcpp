@@ -112,17 +112,6 @@ But `union` is _forgetful_ in the sense that it does not remember whether
 it holds `A` or `B`. The information is contained in the union; but
 without outside help, it cannot be recovered.
 
-```c++
-enum class D {_a, _b} d;
-union S {A a; B b;};
-S s = /* an A or a B */; // these two assignments
-D d = /*   _a or  _b */; // should be atomic
-switch (d) {
-  case D::_a: return s.a;
-  case D::_b: return s.b;
-}
-```
-
 Since the C++ union is forgetful, and additional code would be
 required to make it an actual sum type, it is not being considered a
 proper implementation of a sum type. The C++ standard library has an
