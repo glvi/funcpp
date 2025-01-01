@@ -12,6 +12,6 @@ This is currently work in progress.
 
 ## Introduction
 
-- On sum types in general and in C++ [[link](sum_types)]
+- On sum types in general and in C++ [[link](sum_types.md)]
 
 _(end of file)_
