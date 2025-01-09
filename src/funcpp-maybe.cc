@@ -26,6 +26,18 @@ namespace funcpp {
   struct _some {
     /// @brief Reproduces `A`
     using type = A;
+    /// @brief A value of type `A`
+    type value;
+
+    friend bool operator==(_some a, _some b) = default;
+
+    friend auto operator==(_some s, type a) {
+      return s.value == a;
+    }
+
+    friend auto operator==(type a, _some s) {
+      return a == s.value;
+    }
   };
   /// @endcond
 

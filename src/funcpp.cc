@@ -6,6 +6,7 @@
 export module funcpp;
 export import :common;
 export import :list;
+export import :maybe;
 
 /**
  * @brief Functional C++

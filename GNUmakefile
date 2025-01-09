@@ -1,6 +1,6 @@
 CXX=clang++
 CPPFLAGS=-std=c++20 -nostdinc
-CXXFLAGS=-fprebuilt-module-path=.pcm
+CXXFLAGS=-fprebuilt-module-path=.pcm -g -O0
 
 PRECOMPILE.cc=$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -x c++-module --precompile
 
@@ -12,12 +12,21 @@ clean:
 	-$(RM) .obj/*
 	-$(RM) .pcm/*
 
-test: .bin/list_test
+test: list_test maybe_test
+
+list_test: .bin/list_test
 	.bin/list_test
 
-.bin/list_test: .obj/list_test.o .obj/funcpp.o .obj/funcpp-list.o .obj/funcpp-maybe.o .obj/funcpp-common.o
+maybe_test: .bin/maybe_test
+	.bin/maybe_test
+
+.bin/list_test: .obj/list_test.o .obj/funcpp.o .obj/funcpp-list.o .obj/funcpp-common.o
 
 .obj/list_test.o: .pcm/funcpp.pcm
+
+.bin/maybe_test: .obj/maybe_test.o .obj/funcpp.o .obj/funcpp-maybe.o .obj/funcpp-common.o
+
+.obj/maybe_test.o: .pcm/funcpp.pcm
 
 .obj/funcpp.o .pcm/funcpp.pcm: .pcm/funcpp-common.pcm .pcm/funcpp-list.pcm .pcm/funcpp-maybe.pcm
 
