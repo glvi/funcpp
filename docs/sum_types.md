@@ -264,3 +264,51 @@ unsigned count(tree&&);
 ```
 
 because those types are imaginary, and not known to the compiler.
+
+Even though imaginary, C++ handles sum types just fine with one small caveat.
+In C++ variables have a type, one type, not two, nor more.
+Therefore, to define a variable of a sum type, sum special treatment is needed.
+
+The following code snippet is not valid C++, becauce variables can't be defined having a concept as type.
+```c++
+maybe m; // not valid
+list  l; // not valid
+tree  t; // not valid
+```
+
+In the following code snippet, variable definitions are valid, but also determined.
+Once `m` is defined as `_nothing`; it can never be a `_cons`; and vice versa.
+Similar holds for `l` and `t`.
+```c++
+_nothing m;
+_nil     l;
+_leaf    t;
+```
+
+We have to resort to C++ unions.
+```c++
+template<typename A>
+struct maybe_var {
+  enum { is_nothing, is_some } _d;
+  union { _nothing _n; _some<A> _s; };
+  maybe_var() : _d{is_nothing} {}
+  maybe_var(A a) : _d{is_some}, _s{a} {}
+  operator bool() { return _d == is_some; }
+};
+maybe_var<int> m0;
+maybe_var<int> m1 = 7;
+```
+
+And functions that shall accept such a C++ union as argument, require some consideration.
+```c++
+template<typename R, typename A>
+struct FunctionOnMaybe {
+  R operator()(_nothing) { /* … */ }
+  R operator()(_some<A> s) { /* … */ }
+};
+template<typename R, typename A>
+R someFunction(maybe_var<A> m) {
+  FunctionOnMaybe<R,A> f;
+  return m ? f(m._s) : f(m._n);
+}
+```
